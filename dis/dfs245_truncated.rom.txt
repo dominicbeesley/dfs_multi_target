@@ -3506,11 +3506,11 @@
 9ac6: 60           L9AC6           rts
 
 9ac7: a0 fc        L9AC7           ldy     #$fc
-9ac9: b5 00        L9AC9           lda     $00,X
+9ac9: b5 00        @lp             lda     $00,X
 9acb: 99 a4 c1                     sta     $c1a4,Y
 9ace: e8                           inx
 9acf: c8                           iny
-9ad0: d0 f7                        bne     L9AC9
+9ad0: d0 f7                        bne     @lp
 9ad2: a9 01                        lda     #$01
 9ad4: 48           L9AD4           pha
 9ad5: ac c2 c2                     ldy     $c2c2
@@ -3715,11 +3715,11 @@
 9c8e: a2 03                        ldx     #$03
                    gbpb_seqptr_loop1
 9c90: bd 69 c2                     lda     $c269,X
-9c93: 9d a0 c2                     sta     $c2a0,X
+9c93: 9d a0 c2                     sta     $c2a0,X           ;MMFSDIF: this is B6,X
 9c96: ca                           dex
 9c97: 10 f7                        bpl     gbpb_seqptr_loop1
 9c99: ac 60 c2                     ldy     WKSP261_TransAddr-1
-9c9c: 20 27 99                     jsr     L9927
+9c9c: 20 27 99                     jsr     L9927             ;MMFSDIF: extra
 9c9f: 20 2b 96                     jsr     L962B
 9ca2: 28                           plp
 9ca3: b0 05                        bcs     L9CAA
@@ -4571,7 +4571,7 @@ a35a: b0 04                        bcs     jgbpb_rw_seqptr
 a35c: 28                           plp
 a35d: 6c d7 c2     gbpb_jmpsub     jmp     ($c2d7)
 
-a360: 4c 8b 9c     jgbpb_rw_seqptr jmp     gbpb_rw_seqptr
+a360: 4c 8b 9c     jgbpb_rw_seqptr jmp     gbpb_rw_seqptr    ;MMFSDIF: moved the gbpb_rw_seqptr routine
 
 a363: 20 56 a4     LA363           jsr     LA456
 a366: 30 0d                        bmi     LA375

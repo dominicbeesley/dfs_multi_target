@@ -3513,11 +3513,11 @@ L9AAF:          tax
 @L9AC6:         rts
 
 L9AC7:          ldy     #$fc
-@L9AC9:         lda     $00,X
+@lp:            lda     $00,X
                 sta     $c1a4,Y
                 inx
                 iny
-                bne     @L9AC9
+                bne     @lp
                 lda     #$01
 L9AD4:          pha
                 ldy     $c2c2
@@ -3722,11 +3722,11 @@ gbpb_rw_seqptr: jsr     TUBE_RELEASE_QQQ
                 ldx     #$03
 gbpb_seqptr_loop1:
                 lda     $c269,X
-                sta     $c2a0,X
+                sta     $c2a0,X                 ;MMFSDIF: this is B6,X
                 dex
                 bpl     gbpb_seqptr_loop1
                 ldy     WKSP261_TransAddr-1
-                jsr     L9927
+                jsr     L9927                   ;MMFSDIF: extra
                 jsr     L962B
                 plp
                 bcs     @L9CAA
@@ -4579,7 +4579,7 @@ gbpb_ctlblk_loop:
 gbpb_jmpsub:    jmp     ($c2d7)
 
 jgbpb_rw_seqptr:
-                jmp     gbpb_rw_seqptr
+                jmp     gbpb_rw_seqptr          ;MMFSDIF: moved the gbpb_rw_seqptr routine
 
 LA363:          jsr     LA456
                 bmi     @LA375
